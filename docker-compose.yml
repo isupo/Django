@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
 
   web:
@@ -8,3 +8,19 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+    env_file:
+      - env
+    networks:
+     - djangonetwork
+  db:
+    image: postgres:15.1
+    ports:
+      - "5432:5432"
+    env_file:
+      - env.dev
+    networks:
+     - djangonetwork
+
+networks:
+   djangonetwork:
+     driver: bridge
